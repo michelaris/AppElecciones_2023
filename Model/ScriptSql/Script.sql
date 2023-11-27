@@ -189,7 +189,7 @@ DELIMITER ;
 select * from usuarios
 
 
-/*SPs Elecciones */
+/*Procedimientos almacenados Elecciones */
 DELIMITER $$
 CREATE PROCEDURE `spListarElecciones`
 (
@@ -288,7 +288,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-/*SPs Candidato */
+/*Procedimientos Almacenados para  Candidato */
 DELIMITER $$
 CREATE PROCEDURE `spListarCandidatos`
 (
@@ -400,7 +400,7 @@ DELIMITER ;
 
 /*-------------------------------------------------------*/
 
-/*SPs Votante */
+/*Procedimientos almacenados para Votante */
 DELIMITER $$
 CREATE PROCEDURE `sp_LoginVotante`
 (
@@ -539,7 +539,8 @@ BEGIN
     where IdVotante=pIdVotante; 
 END $$
 DELIMITER ;
---  SPs Votaciones --
+
+--  Procedimientos Almacenados para Votaciones --
 DELIMITER $$
 CREATE PROCEDURE `spListarVotaciones`
 (
@@ -633,7 +634,7 @@ DELIMITER ;
 
 -- Resultados
 
-/*PAra la vista, 
+/*Para la vista, 
 	- una lista con las elecciones minimizada con votones de mostrar resultados
     - una lista con los candidatos minimizada, y al lado los 3 primeros puestos con % de votos
     */
@@ -643,11 +644,7 @@ CREATE PROCEDURE `spListarResultados_Candidatos`
     IN cTexto VARCHAR(225)
 )
 BEGIN
-    SELECT 	r.IdResultado_Candidatos, r.FechaRegistro, 
-    
-    
-    
-    
+    SELECT 	r.IdResultado_Candidatos, r.FechaRegistro,
     e.IdEleccion, e.Descripcion, e.Cargo, e.Activo, e.FechaRegistro, e.FechaVotacion,
 			concat(u.nombres," ",u.apellidos) as NombreUsuario, e.Foto, e.IdUsuario
 	from resultados_candidatos r 
