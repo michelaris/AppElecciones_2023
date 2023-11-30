@@ -182,5 +182,51 @@ namespace Model.Dao
             finally
             { if (SqlCon.State == ConnectionState.Open) SqlCon.Close(); }
         }
+        public DataTable listarResultados(int idEleccion)
+        {
+            MySqlDataReader Resultado;
+            DataTable Tabla = new DataTable();
+            MySqlConnection SqlCon = new MySqlConnection();
+            try
+            {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "spCalcularMayorPorcentajeVotosConFoto";//"listarElecciones";
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.CommandTimeout = 60;
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.AddWithValue("pIdEleccion", idEleccion);
+                SqlCon.Open();
+                Resultado = Comando.ExecuteReader();
+                Tabla.Load(Resultado);
+                return Tabla;
+            }
+            catch (Exception ex)
+            { throw ex; }
+            finally
+            { if (SqlCon.State == ConnectionState.Open) SqlCon.Close(); }
+        }
+        public DataTable listarEleccionesConVotacion(string cTexto)
+        {
+            MySqlDataReader Resultado;
+            DataTable Tabla = new DataTable();
+            MySqlConnection SqlCon = new MySqlConnection();
+            try
+            {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "spListarEleccionesConVotacion";//"listarElecciones";
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.CommandTimeout = 60;
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.AddWithValue("cTexto", cTexto);
+                SqlCon.Open();
+                Resultado = Comando.ExecuteReader();
+                Tabla.Load(Resultado);
+                return Tabla;
+            }
+            catch (Exception ex)
+            { throw ex; }
+            finally
+            { if (SqlCon.State == ConnectionState.Open) SqlCon.Close(); }
+        }
     }
 }

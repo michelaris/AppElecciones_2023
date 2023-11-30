@@ -79,19 +79,10 @@ namespace Vista.Formularios
                     Rpta = eleccionController.CrearEleccion(ele);
                     if (Rpta.Equals("OK"))
                     {
-                        //nEstadoguarda = 0;                        
-
-                        /* MessageBox.Show("Los datos han sido guardados correctamente",
-                                         "Aviso del Sistema",
-                                         MessageBoxButtons.OK,
-                                         MessageBoxIcon.Information);
-                        */
+                       
                         MensajeBox m = new MensajeBox("Guardo", "La Eleccion: " + ele.Descripcion);
-                        // m.ShowDialog();
+                       
                         DialogResult dg = m.ShowDialog();
-                        //label1.Text = dg.ToString();
-
-                        //cargarLista();
                         limpiarCampos();
                     }
                     else

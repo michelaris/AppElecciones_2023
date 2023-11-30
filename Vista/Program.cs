@@ -20,7 +20,7 @@ namespace Vista
             //Application.Run(new Form1());
            //Application.Run(new FormUsuarios());
             Application.Run(new FormLogin());
-            //Application.Run(new FormVotaciones());
+          //  Application.Run(new FormResultados());
         }
     }
 }

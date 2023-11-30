@@ -40,5 +40,14 @@ namespace Controller
             usu = EleccionDao.obtenerEleccion(idEleccion);
             return usu;
         }
+        /*----------------*/
+        public DataTable ListarResultados(int idEleccion)
+        {
+            return EleccionDao.listarResultados(idEleccion);
+        }
+        public DataTable ListarEleccionesConVotacion(string cTexto)
+        {
+            return EleccionDao.listarEleccionesConVotacion(cTexto);
+        }
     }
 }

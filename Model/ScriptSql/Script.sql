@@ -1,6 +1,6 @@
 CREATE DATABASE DB_Elecciones;
 USE DB_Elecciones;
-
+/*
 CREATE TABLE Usuarios (
     IdUsuario INT primary key auto_increment,
     DocumentoIdentidad VARCHAR (50)  NULL,
