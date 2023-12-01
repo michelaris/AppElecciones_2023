@@ -173,5 +173,45 @@ namespace Model.Dao
             finally
             { if (SqlCon.State == ConnectionState.Open) SqlCon.Close(); }
         }
+        
+       public Votacion obtenerVotancionXIdVotante(int idVotante)
+        {
+            Votacion oVo = new Votacion();
+            MySqlDataReader Resultado;
+            DataTable Tabla = new DataTable();
+            MySqlConnection SqlCon = new MySqlConnection();
+            try
+            {
+                string sql_tarea = "spObtenerVotacionXIdVotante";
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.AddWithValue("pIdVotante", idVotante);
+                Comando.CommandTimeout = 60;
+
+                SqlCon.Open();
+                Resultado = Comando.ExecuteReader();
+                if (Resultado.HasRows)
+                {
+                    while (Resultado.Read())
+                    {
+                        oVo.IdVotacion = Resultado.GetInt32(0);
+                        oVo.FechaRegistro = Resultado.GetDateTime(1);
+                        oVo.IdEleccion = Resultado.GetInt32(2);
+                        oVo.IdVotante = Resultado.GetInt32(3);
+                        oVo.IdCandidato = Resultado.GetInt32(4);
+                    }
+                }
+
+                Tabla.Load(Resultado);
+                //return Tabla;
+                return oVo;
+            }
+            catch (Exception ex)
+            { throw ex; }
+            finally
+            { if (SqlCon.State == ConnectionState.Open) SqlCon.Close(); }
+        }
     }
 }

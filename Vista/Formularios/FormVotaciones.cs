@@ -32,13 +32,17 @@ namespace Vista.Formularios
             this.txtDni.Text = VotanteCache.DocumentoIdentidad;
             this.txtNombres.Text = VotanteCache.Nombres;
             this.txtApellidos.Text = VotanteCache.Apellidos;
-            this.chbEmitioVotacion.Checked = VotanteCache.Activo;
+            this.chkActivo.Checked = VotanteCache.Activo;
             this.dtpFechaRegistro.Value = VotanteCache.FechaRegistro;
             this.chbEmitioVotacion.Checked = VotanteCache.EmitioVotacion;
             var eleccion=eleccionController.ObtenerEleccion(VotanteCache.IdEleccion);
             this.txtEleccionCargo.Text = eleccion.Cargo;
 
             this.lblFechaDeEleccion.Text = "Fecha de Eleccion: "+eleccion.FechaVotacion.ToString("dd MMMM , yyyy");
+            if (VotanteCache.EmitioVotacion==true)
+            {
+                this.btnEmitirVotacion.Text = "Actualizar Voto";
+            }
             
         }
         private void cargarListaCandidatos(int idEleccion)
@@ -130,58 +134,75 @@ namespace Vista.Formularios
         {
             try
             {
-                if (this.txtNombres.Text != null)
+                if (this.txtNombres.Text != null )
+
                 {
                     string Rpta = "";
                     Votacion vo = new Votacion();
-                    vo.FechaRegistro = this.dtpFechaRegistro.Value;
-                    //var eleccion = eleccionController.ObtenerEleccion(VotanteCache.IdEleccion);
-                    vo.IdEleccion = VotanteCache.IdEleccion;
-                    vo.IdVotante = VotanteCache.IdVotante;
-                    vo.IdCandidato =int.Parse(this.txtIdCandidato.Text);                    
-                    Rpta = votacionController.CrearVotancion(vo);
-                    if (Rpta.Equals("OK"))
+                    if (VotanteCache.EmitioVotacion!=true) // se agrego para, solo puede emitir una sola ves votacion
                     {
-                        //nEstadoguarda = 0;                        
-
-                        /* MessageBox.Show("Los datos han sido guardados correctamente",
-                                         "Aviso del Sistema",
-                                         MessageBoxButtons.OK,
-                                         MessageBoxIcon.Information);
-                        */
-
-                        //MensajeBox m = new MensajeBox("Realizo Votacion", "El Usuario: " + VotanteCache.Nombres + " " + VotanteCache.Apellidos);
-                        // m.ShowDialog();
-                       // DialogResult dg = m.ShowDialog();
-                        var rest=votanteController.EditarVotante_EmitioVotacion(VotanteCache.IdVotante, true);
-                        if (rest.Equals("OK"))
-                        {
-                            MensajeBox m = new MensajeBox("Realizo Votacion", "El Usuario: " + VotanteCache.Nombres + " " + VotanteCache.Apellidos);
-                            DialogResult dg = m.ShowDialog();
-                            this.chbEmitioVotacion.ForeColor = Color.GreenYellow;
-                            this.chbEmitioVotacion.Text = "SI";
-                            this.chbEmitioVotacion.Checked = true;
-                        }
-                        //label1.Text = dg.ToString();
-
-                        //cargarLista();
-                        //limpiarCampos();
                         
-
+                        vo.FechaRegistro = this.dtpFechaRegistro.Value;
+                        //var eleccion = eleccionController.ObtenerEleccion(VotanteCache.IdEleccion);
+                        vo.IdEleccion = VotanteCache.IdEleccion;
+                        vo.IdVotante = VotanteCache.IdVotante;
+                        vo.IdCandidato = int.Parse(this.txtIdCandidato.Text);
+                        Rpta = votacionController.CrearVotancion(vo);
+                        if (Rpta.Equals("OK"))
+                        {                           
+                            var rest = votanteController.EditarVotante_EmitioVotacion(VotanteCache.IdVotante, true);
+                            if (rest.Equals("OK"))
+                            {
+                                MensajeBox m = new MensajeBox("Realizo Votacion", "El Usuario: " + VotanteCache.Nombres + " " + VotanteCache.Apellidos);
+                                DialogResult dg = m.ShowDialog();
+                                this.chbEmitioVotacion.ForeColor = Color.GreenYellow;
+                                this.chbEmitioVotacion.Text = "SI";
+                                this.chbEmitioVotacion.Checked = true;
+                            }     
+                        }
+                        else
+                        {
+                            MessageBox.Show(Rpta,
+                                            "Aviso del Sistema",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show(Rpta,
-                                        "Aviso del Sistema",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
+                        vo = votacionController.ObtenerVotancionXIdVotante(VotanteCache.IdVotante);
+                     
+                       // vo.FechaRegistro = this.dtpFechaRegistro.Value;
+                        //var eleccion = eleccionController.ObtenerEleccion(VotanteCache.IdEleccion);
+                        vo.IdEleccion = VotanteCache.IdEleccion;
+                        vo.IdVotante = VotanteCache.IdVotante;
+                        vo.IdCandidato = int.Parse(this.txtIdCandidato.Text);
+                        Rpta = votacionController.EditarVotancion(vo);
+                        if (Rpta.Equals("OK"))
+                        {
+                            var rest = votanteController.EditarVotante_EmitioVotacion(VotanteCache.IdVotante, true);
+                            if (rest.Equals("OK"))
+                            {
+                                MensajeBox m = new MensajeBox("Actualizo Votacion", "El Usuario: " + VotanteCache.Nombres + " " + VotanteCache.Apellidos);
+                                DialogResult dg = m.ShowDialog();
+                                this.chbEmitioVotacion.ForeColor = Color.GreenYellow;
+                                this.chbEmitioVotacion.Text = "SI";
+                                this.chbEmitioVotacion.Checked = true;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(Rpta,
+                                            "Aviso del Sistema",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error);
+                        }
                     }
-                    //cargarLista();
 
                 }
                 else
                 {
-                    MessageBox.Show("Debe Seleccionar Fotografia", "Error");
+                    MessageBox.Show("Debe Seleccionar Votante", "Error");
                 }
             }
             catch (Exception ex)

@@ -42,5 +42,12 @@ namespace Controller
             usu = votancionDao.obtenerVotacion(idVotacion);
             return usu;
         }
+        public Votacion ObtenerVotancionXIdVotante(int idVotante)
+        {
+            Votacion vot = new Votacion();
+            vot = votancionDao.obtenerVotancionXIdVotante(idVotante);
+            return vot;
+        }
+
     }
 }
