@@ -59,14 +59,11 @@ namespace Vista.Formularios
                     
                     if (this.dgvCandidatos.Rows[0].Cells[4].Value!=null & this.dgvCandidatos.Rows[1].Cells[4].Value != null & this.dgvCandidatos.Rows[2].Cells[4].Value != null)
                     {
-                        /*this.gunaCircleProgressBarPrimerPuesto.Value = Convert.ToInt32(this.dgvCandidatos.Rows[0].Cells[4].Value);
-                        this.gunaCircleProgressBarSegundoPuesto.Value = Convert.ToInt32(this.dgvCandidatos.Rows[1].Cells[4].Value);
-                        this.gunaCircleProgressBarTercerPuesto.Value = Convert.ToInt32(this.dgvCandidatos.Rows[2].Cells[4].Value);*/
+
                         this.gunaCircleProgressBarPrimerPuesto.Value = this.dgvCandidatos.Rows[0].Cells[4].Value == null ? 0 : Convert.ToInt32(this.dgvCandidatos.Rows[0].Cells[4].Value);
                         this.gunaCircleProgressBarSegundoPuesto.Value = this.dgvCandidatos.Rows[1].Cells[4].Value == null ? 0 : Convert.ToInt32(this.dgvCandidatos.Rows[1].Cells[4].Value);
                         this.gunaCircleProgressBarTercerPuesto.Value = this.dgvCandidatos.Rows[2].Cells[4].Value == null ? 0 : Convert.ToInt32(this.dgvCandidatos.Rows[2].Cells[4].Value);
 
-                        // this.pcbFotoPrimerPuesto.Image=bytesToImage((byte[])(this.dgvCandidatos.CurrentRow.Cells[5].Value));
                         this.pcbFotoPrimerPuesto.Image = bytesToImage((byte[])(this.dgvCandidatos.Rows[0].Cells[5].Value));
                         this.pcbFotoSegundoPuesto.Image = bytesToImage((byte[])(this.dgvCandidatos.Rows[1].Cells[5].Value));
                         this.pcbFotoTercerPuesto.Image = bytesToImage((byte[])(this.dgvCandidatos.Rows[2].Cells[5].Value));

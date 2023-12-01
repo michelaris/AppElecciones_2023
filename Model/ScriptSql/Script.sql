@@ -670,7 +670,69 @@ WHERE   e.Cargo LIKE CONCAT('%', cTexto , '%');
 END $$
 DELIMITER ;
 -- select * from elecciones;
+  
+  DELIMITER $$
+CREATE PROCEDURE `spObtenerVotacionXIdVotante`
+(
+    IN pIdVotante int
+)
+BEGIN
+    Select * from votaciones
+    where IdVotante=pIdVotante; 
+END $$
+DELIMITER ;
+call spObtenerVotacionXIdVotante(66);
+   
 
+DELIMITER $$
+CREATE PROCEDURE `spListarEleccionesConVotacion`
+(
+    IN cTexto VARCHAR(225)
+)
+BEGIN
+    SELECT DISTINCT 	e.IdEleccion, e.Descripcion, e.Cargo, e.Activo, e.FechaRegistro, e.FechaVotacion,
+			concat(u.nombres," ",u.apellidos) as NombreUsuario, e.Foto, e.IdUsuario,"Mostrar" as op
+	from elecciones e                
+    Inner join usuarios u on e.IdUsuario=u.IdUsuario
+    Inner join Votaciones v ON e.IdEleccion = v.IdEleccion
+WHERE   e.Cargo LIKE CONCAT('%', cTexto , '%');
+END $$
+DELIMITER ;
+ */
+ DELIMITER $$
+CREATE PROCEDURE spCalcularMayorPorcentajeVotosConFoto
+(
+	IN pIdEleccion INT
+)
+BEGIN
+    -- Variable para almacenar el total de votos
+    DECLARE totalVotos INT;
+    -- Obtener el total de votos para la elección
+    SELECT COUNT(*) INTO totalVotos
+    FROM Votaciones
+    WHERE IdEleccion = pIdEleccion;
+    -- Calcular y mostrar el porcentaje de votos para cada candidato en la elección
+    SELECT
+        c.IdCandidato,
+        c.Nombres,
+        c.Apellidos,
+        COUNT(v.IdVotacion) AS VotosObtenidos,
+        ROUND((COUNT(v.IdVotacion) / totalVotos) * 100, 2) AS PorcentajeVotos,
+        c.foto
+    FROM
+        Candidatos c
+    LEFT JOIN
+        Votaciones v ON c.IdCandidato = v.IdCandidato
+    WHERE
+        c.IdEleccion = pIdEleccion
+    GROUP BY
+        c.IdCandidato, c.Nombres, c.Apellidos
+    ORDER BY
+        PorcentajeVotos DESC, c.Apellidos;
+END $$
+DELIMITER ;
+
+ 
 
 
 

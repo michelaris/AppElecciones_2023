@@ -159,7 +159,7 @@ namespace Model.Dao
                         oVo.IdVotacion = Resultado.GetInt32(0);
                         oVo.FechaRegistro = Resultado.GetDateTime(1);
                         oVo.IdEleccion = Resultado.GetInt32(2);
-                        oVo.IdVotacion = Resultado.GetInt32(3);
+                        oVo.IdVotante = Resultado.GetInt32(3);// corregir
                         oVo.IdCandidato = Resultado.GetInt32(4);                      
                     }
                 }
@@ -199,7 +199,7 @@ namespace Model.Dao
                         oVo.IdVotacion = Resultado.GetInt32(0);
                         oVo.FechaRegistro = Resultado.GetDateTime(1);
                         oVo.IdEleccion = Resultado.GetInt32(2);
-                        oVo.IdVotante = Resultado.GetInt32(3);
+                        oVo.IdVotante = Resultado.GetInt32(3);// realicen la correcion aqui
                         oVo.IdCandidato = Resultado.GetInt32(4);
                     }
                 }

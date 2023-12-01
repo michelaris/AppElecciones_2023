@@ -168,7 +168,7 @@ namespace Vista.Formularios
                                             MessageBoxIcon.Error);
                         }
                     }
-                    else
+                    else //cuando ya emitio votacion y desea cambiar su voto
                     {
                         vo = votacionController.ObtenerVotancionXIdVotante(VotanteCache.IdVotante);
                      
