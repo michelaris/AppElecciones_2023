@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,10 +18,20 @@ namespace Vista.Formularios
     {
         EleccionController eleccionController = new EleccionController();
         UsuarioController usuarioController = new UsuarioController();
+        int porcentajeDeVotos = 0;
         public FormResultados()
         {
             InitializeComponent();
             cargarLista();
+            cargarListaElecciones();
+        }
+
+        private void cargarListaElecciones()
+        {
+           
+            this.cmbElecciones.DataSource = eleccionController.ListarElecciones("%");
+            this.cmbElecciones.ValueMember = "idEleccion";
+            this.cmbElecciones.DisplayMember = "cargo";
         }
         private void cargarLista()
         {
@@ -67,6 +78,9 @@ namespace Vista.Formularios
                         this.pcbFotoPrimerPuesto.Image = bytesToImage((byte[])(this.dgvCandidatos.Rows[0].Cells[5].Value));
                         this.pcbFotoSegundoPuesto.Image = bytesToImage((byte[])(this.dgvCandidatos.Rows[1].Cells[5].Value));
                         this.pcbFotoTercerPuesto.Image = bytesToImage((byte[])(this.dgvCandidatos.Rows[2].Cells[5].Value));
+
+
+                        this.porcentajeDeVotos= this.dgvCandidatos.Rows[0].Cells[4].Value == null ? 0 : Convert.ToInt32(this.dgvCandidatos.Rows[0].Cells[4].Value);
                     }
                     else
                     {
@@ -119,5 +133,70 @@ namespace Vista.Formularios
                 throw;
             }
         }
+
+        private void btnFinalizarEleccion_Click(object sender, EventArgs e)
+        {
+            Resultado resultado = new Resultado();
+            resultado.PorcentajeVotos = this.porcentajeDeVotos;
+
+
+            // crear el ResultadoController, ResultadoDao
+            // crearResultado(resultado);
+
+        }
+        CandidatoController candidatoController = new CandidatoController();
+        private void cmbElecciones_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                int idEleccion = int.Parse(this.cmbElecciones.SelectedValue.ToString());
+              //  this.txtBuscarEleccion.Text = idEleccion.ToString();
+                cargarCandidatos(idEleccion);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al Cargar Candidatos " + ex.Message, "Error");
+            }
+
+        }
+        private void cargarCandidatos(int idEleccion)
+        {
+            this.dgvCandidatos.DataSource = eleccionController.ListarResultados(idEleccion);//candidatoController.ListarCandidatosPorEleccion(idEleccion);
+            cargarCantidadDeCandidatosPorEleccion(idEleccion);
+
+        }
+        private void cargarCantidadDeCandidatosPorEleccion(int idEleccion)
+        {
+            int cant = this.candidatoController.ObtenerCantidadCandidatosDeUnaEleccion(idEleccion);
+            int canRestante = 10 - cant;
+            if (cant<10)
+            {   
+                this.lblCantidadDeCandidatos.ForeColor = Color.Blue;
+                this.lblCantidadDeCandidatos.Text = "CANTIDAD: " + cant.ToString();
+                this.lblCantidadRestante.ForeColor = Color.Blue;
+                this.lblCantidadRestante.Text = "Le quedan "+canRestante.ToString()+" espacios ";
+
+            }
+            else
+            {
+                if (cant==10)
+                {
+                    this.lblCantidadDeCandidatos.ForeColor = Color.Green;
+                    this.lblCantidadDeCandidatos.Text = "CANTIDAD LIMITE: " + cant.ToString();
+                    this.lblCantidadRestante.ForeColor = Color.Green;
+                    this.lblCantidadRestante.Text = "Le quedan " + canRestante.ToString() + " espacios ";
+                }
+                else
+                {
+                    this.lblCantidadDeCandidatos.ForeColor = Color.Red;
+                    this.lblCantidadDeCandidatos.Text = "No PUEDE AGREGAR MAS TAREAS";
+                    this.lblCantidadRestante.ForeColor = Color.Red;
+                    this.lblCantidadRestante.Text = canRestante.ToString();
+                }
+
+            }
+           
+        }
+        
     }
 }

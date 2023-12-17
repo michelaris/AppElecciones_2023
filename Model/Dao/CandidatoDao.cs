@@ -81,6 +81,35 @@ namespace Model.Dao
             { if (SqlCon.State == ConnectionState.Open) SqlCon.Close(); }
         }
 
+
+        // obtener cantidad de Candidatos de una eleccion spObtenerCantidadCandidatosDeUnaEleccion
+        public int obtenerCantidadCandidatosDeUnaEleccion(int idEleccion)
+        {
+            MySqlDataReader Resultado;
+            int cantidadCandidatos = 0;
+            MySqlConnection SqlCon = new MySqlConnection();
+            try
+            {
+                SqlCon = Conexion.getInstancia().CrearConexion();
+                string sql_tarea = "spObtenerCantidadCandidatosDeUnaEleccion";
+                MySqlCommand Comando = new MySqlCommand(sql_tarea, SqlCon);
+                Comando.CommandTimeout = 60;
+                Comando.CommandType = CommandType.StoredProcedure;
+                Comando.Parameters.AddWithValue("pIdEleccion", idEleccion);
+                SqlCon.Open();
+                Resultado = Comando.ExecuteReader();
+                if (Resultado.Read()) // Corregido para leer el resultado
+                {
+                    cantidadCandidatos = Resultado.GetInt32("CantidadDeCandidatos");
+                }
+                return cantidadCandidatos;
+            }
+            catch (Exception ex)
+            { throw ex; }
+            finally
+            { if (SqlCon.State == ConnectionState.Open) SqlCon.Close(); }
+        }
+
         public string crearCandidato(Candidato oCa)
         {
             string Rpta = "";

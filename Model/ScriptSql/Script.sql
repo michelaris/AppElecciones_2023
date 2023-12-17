@@ -698,7 +698,7 @@ BEGIN
 WHERE   e.Cargo LIKE CONCAT('%', cTexto , '%');
 END $$
 DELIMITER ;
- */
+
  DELIMITER $$
 CREATE PROCEDURE spCalcularMayorPorcentajeVotosConFoto
 (
@@ -732,6 +732,24 @@ BEGIN
 END $$
 DELIMITER ;
 
+-- sp contar registros en tabla candidatos segun eleccion
+DELIMITER $$
+CREATE PROCEDURE spObtenerCantidadCandidatosDeUnaEleccion(
+    IN pIdEleccion INT
+)
+BEGIN
+    DECLARE cantidadCandidatos INT;
+
+    SELECT COUNT(*) INTO cantidadCandidatos
+    FROM Candidatos
+    WHERE IdEleccion = pIdEleccion;
+
+    SELECT cantidadCandidatos AS CantidadDeCandidatos;
+END $$
+DELIMITER ;
+
+
+ */
  
 
 

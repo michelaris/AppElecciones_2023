@@ -31,13 +31,13 @@ namespace Vista.Formularios
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormResultados));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gunaGroupBox1 = new Guna.UI.WinForms.GunaGroupBox();
             this.btnFinalizarEleccion = new FontAwesome.Sharp.IconButton();
             this.gunaLabel2 = new Guna.UI.WinForms.GunaLabel();
@@ -82,6 +82,9 @@ namespace Vista.Formularios
             this.txtNombresCandidato = new Guna.UI.WinForms.GunaTextBox();
             this.pcbFotoCandidato = new Guna.UI.WinForms.GunaCirclePictureBox();
             this.gunaElipse1 = new Guna.UI.WinForms.GunaElipse(this.components);
+            this.cmbElecciones = new Guna.UI.WinForms.GunaComboBox();
+            this.lblCantidadDeCandidatos = new System.Windows.Forms.Label();
+            this.lblCantidadRestante = new System.Windows.Forms.Label();
             this.gunaGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbFotoSegundoPuesto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbFotoTercerPuesto)).BeginInit();
@@ -99,6 +102,9 @@ namespace Vista.Formularios
             this.gunaGroupBox1.BackColor = System.Drawing.Color.Transparent;
             this.gunaGroupBox1.BaseColor = System.Drawing.Color.White;
             this.gunaGroupBox1.BorderColor = System.Drawing.Color.Gainsboro;
+            this.gunaGroupBox1.Controls.Add(this.lblCantidadRestante);
+            this.gunaGroupBox1.Controls.Add(this.lblCantidadDeCandidatos);
+            this.gunaGroupBox1.Controls.Add(this.cmbElecciones);
             this.gunaGroupBox1.Controls.Add(this.btnFinalizarEleccion);
             this.gunaGroupBox1.Controls.Add(this.gunaLabel2);
             this.gunaGroupBox1.Controls.Add(this.gunaLabel1);
@@ -137,13 +143,14 @@ namespace Vista.Formularios
             this.btnFinalizarEleccion.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnFinalizarEleccion.IconSize = 35;
             this.btnFinalizarEleccion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFinalizarEleccion.Location = new System.Drawing.Point(410, 31);
+            this.btnFinalizarEleccion.Location = new System.Drawing.Point(405, 31);
             this.btnFinalizarEleccion.Name = "btnFinalizarEleccion";
             this.btnFinalizarEleccion.Size = new System.Drawing.Size(276, 41);
             this.btnFinalizarEleccion.TabIndex = 163;
             this.btnFinalizarEleccion.Text = "Finalizar Eleccion";
             this.btnFinalizarEleccion.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnFinalizarEleccion.UseVisualStyleBackColor = false;
+            this.btnFinalizarEleccion.Click += new System.EventHandler(this.btnFinalizarEleccion_Click);
             // 
             // gunaLabel2
             // 
@@ -200,7 +207,7 @@ namespace Vista.Formularios
             this.gunaCircleProgressBarTercerPuesto.IdleOffset = 20;
             this.gunaCircleProgressBarTercerPuesto.Image = null;
             this.gunaCircleProgressBarTercerPuesto.ImageSize = new System.Drawing.Size(52, 52);
-            this.gunaCircleProgressBarTercerPuesto.Location = new System.Drawing.Point(951, 85);
+            this.gunaCircleProgressBarTercerPuesto.Location = new System.Drawing.Point(951, 93);
             this.gunaCircleProgressBarTercerPuesto.Name = "gunaCircleProgressBarTercerPuesto";
             this.gunaCircleProgressBarTercerPuesto.ProgressMaxColor = System.Drawing.Color.Red;
             this.gunaCircleProgressBarTercerPuesto.ProgressMinColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
@@ -232,7 +239,7 @@ namespace Vista.Formularios
             this.gunaCircleProgressBarSegundoPuesto.IdleOffset = 20;
             this.gunaCircleProgressBarSegundoPuesto.Image = null;
             this.gunaCircleProgressBarSegundoPuesto.ImageSize = new System.Drawing.Size(52, 52);
-            this.gunaCircleProgressBarSegundoPuesto.Location = new System.Drawing.Point(683, 75);
+            this.gunaCircleProgressBarSegundoPuesto.Location = new System.Drawing.Point(683, 83);
             this.gunaCircleProgressBarSegundoPuesto.Name = "gunaCircleProgressBarSegundoPuesto";
             this.gunaCircleProgressBarSegundoPuesto.ProgressMaxColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.gunaCircleProgressBarSegundoPuesto.ProgressMinColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
@@ -264,21 +271,21 @@ namespace Vista.Formularios
             // 
             this.dgvElecciones.AllowUserToAddRows = false;
             this.dgvElecciones.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle36.BackColor = System.Drawing.Color.White;
-            this.dgvElecciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvElecciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvElecciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvElecciones.BackgroundColor = System.Drawing.Color.White;
             this.dgvElecciones.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvElecciones.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvElecciones.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle37.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle37.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvElecciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvElecciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvElecciones.ColumnHeadersHeight = 22;
             this.dgvElecciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -291,14 +298,14 @@ namespace Vista.Formularios
             this.dataGridViewImageColumn1,
             this.dataGridViewTextBoxColumn4,
             this.op});
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle39.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle39.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle39.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvElecciones.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvElecciones.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvElecciones.EnableHeadersVisualStyles = false;
             this.dgvElecciones.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvElecciones.Location = new System.Drawing.Point(7, 35);
@@ -422,14 +429,14 @@ namespace Vista.Formularios
             // op
             // 
             this.op.DataPropertyName = "op";
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle38.BackColor = System.Drawing.Color.Gold;
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle38.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle38.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.Color.Gold;
-            this.op.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Gold;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Gold;
+            this.op.DefaultCellStyle = dataGridViewCellStyle3;
             this.op.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.op.HeaderText = "Candidat@s";
             this.op.Name = "op";
@@ -446,7 +453,7 @@ namespace Vista.Formularios
             this.gunaCircleProgressBarPrimerPuesto.IdleOffset = 20;
             this.gunaCircleProgressBarPrimerPuesto.Image = null;
             this.gunaCircleProgressBarPrimerPuesto.ImageSize = new System.Drawing.Size(52, 52);
-            this.gunaCircleProgressBarPrimerPuesto.Location = new System.Drawing.Point(807, 55);
+            this.gunaCircleProgressBarPrimerPuesto.Location = new System.Drawing.Point(807, 63);
             this.gunaCircleProgressBarPrimerPuesto.Name = "gunaCircleProgressBarPrimerPuesto";
             this.gunaCircleProgressBarPrimerPuesto.ProgressMaxColor = System.Drawing.Color.Lime;
             this.gunaCircleProgressBarPrimerPuesto.ProgressMinColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
@@ -519,21 +526,21 @@ namespace Vista.Formularios
             // 
             this.dgvCandidatos.AllowUserToAddRows = false;
             this.dgvCandidatos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle40.BackColor = System.Drawing.Color.White;
-            this.dgvCandidatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            this.dgvCandidatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCandidatos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCandidatos.BackgroundColor = System.Drawing.Color.White;
             this.dgvCandidatos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvCandidatos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvCandidatos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle41.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle41.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCandidatos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCandidatos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCandidatos.ColumnHeadersHeight = 22;
             this.dgvCandidatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdCandidato,
@@ -542,14 +549,14 @@ namespace Vista.Formularios
             this.VotosObtenidos,
             this.PorcentajeVotos,
             this.Foto});
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle42.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle42.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle42.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCandidatos.DefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCandidatos.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvCandidatos.EnableHeadersVisualStyles = false;
             this.dgvCandidatos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvCandidatos.Location = new System.Drawing.Point(7, 33);
@@ -810,6 +817,47 @@ namespace Vista.Formularios
             this.gunaElipse1.Radius = 6;
             this.gunaElipse1.TargetControl = this.btnFinalizarEleccion;
             // 
+            // cmbElecciones
+            // 
+            this.cmbElecciones.BackColor = System.Drawing.Color.Transparent;
+            this.cmbElecciones.BaseColor = System.Drawing.Color.White;
+            this.cmbElecciones.BorderColor = System.Drawing.Color.Silver;
+            this.cmbElecciones.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbElecciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbElecciones.FocusedColor = System.Drawing.Color.Empty;
+            this.cmbElecciones.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cmbElecciones.ForeColor = System.Drawing.Color.Black;
+            this.cmbElecciones.FormattingEnabled = true;
+            this.cmbElecciones.Location = new System.Drawing.Point(690, 39);
+            this.cmbElecciones.Name = "cmbElecciones";
+            this.cmbElecciones.OnHoverItemBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.cmbElecciones.OnHoverItemForeColor = System.Drawing.Color.White;
+            this.cmbElecciones.Size = new System.Drawing.Size(184, 26);
+            this.cmbElecciones.TabIndex = 164;
+            this.cmbElecciones.SelectionChangeCommitted += new System.EventHandler(this.cmbElecciones_SelectionChangeCommitted);
+            // 
+            // lblCantidadDeCandidatos
+            // 
+            this.lblCantidadDeCandidatos.AutoSize = true;
+            this.lblCantidadDeCandidatos.Font = new System.Drawing.Font("Agency FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidadDeCandidatos.ForeColor = System.Drawing.Color.Silver;
+            this.lblCantidadDeCandidatos.Location = new System.Drawing.Point(921, 28);
+            this.lblCantidadDeCandidatos.Name = "lblCantidadDeCandidatos";
+            this.lblCantidadDeCandidatos.Size = new System.Drawing.Size(149, 24);
+            this.lblCantidadDeCandidatos.TabIndex = 165;
+            this.lblCantidadDeCandidatos.Text = "Cantidad de Candidatos:";
+            // 
+            // lblCantidadRestante
+            // 
+            this.lblCantidadRestante.AutoSize = true;
+            this.lblCantidadRestante.Font = new System.Drawing.Font("Agency FB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidadRestante.ForeColor = System.Drawing.Color.Silver;
+            this.lblCantidadRestante.Location = new System.Drawing.Point(921, 55);
+            this.lblCantidadRestante.Name = "lblCantidadRestante";
+            this.lblCantidadRestante.Size = new System.Drawing.Size(64, 24);
+            this.lblCantidadRestante.TabIndex = 166;
+            this.lblCantidadRestante.Text = "Restante:";
+            // 
             // FormResultados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -883,5 +931,8 @@ namespace Vista.Formularios
         private Guna.UI.WinForms.GunaCirclePictureBox pcbFotoCandidato;
         private FontAwesome.Sharp.IconButton btnFinalizarEleccion;
         private Guna.UI.WinForms.GunaElipse gunaElipse1;
+        private Guna.UI.WinForms.GunaComboBox cmbElecciones;
+        private System.Windows.Forms.Label lblCantidadDeCandidatos;
+        private System.Windows.Forms.Label lblCantidadRestante;
     }
 }

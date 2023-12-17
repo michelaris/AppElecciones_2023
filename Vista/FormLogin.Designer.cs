@@ -347,7 +347,7 @@ namespace Vista
             this.txtPassword.PasswordChar = '●';
             this.txtPassword.Radius = 10;
             this.txtPassword.Size = new System.Drawing.Size(220, 43);
-            this.txtPassword.TabIndex = 2;
+            this.txtPassword.TabIndex = 4;
             this.txtPassword.Text = "Password";
             this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPassword.UseSystemPasswordChar = true;

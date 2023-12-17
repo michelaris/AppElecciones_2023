@@ -23,6 +23,11 @@ namespace Controller
             return candidatoDao.listarCandidatosPorEleccion(idEleccion);
         }
 
+        public int ObtenerCantidadCandidatosDeUnaEleccion(int idEleccion)
+        {
+            return candidatoDao.obtenerCantidadCandidatosDeUnaEleccion(idEleccion);
+        }
+
         public DataTable listarCandidatosPorEleccionParaVotante(int idEleccion)
         {
             return candidatoDao.listarCandidatosPorEleccionParaVotante(idEleccion);
