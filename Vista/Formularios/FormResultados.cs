@@ -168,6 +168,7 @@ namespace Vista.Formularios
         private void cargarCantidadDeCandidatosPorEleccion(int idEleccion)
         {
             int cant = this.candidatoController.ObtenerCantidadCandidatosDeUnaEleccion(idEleccion);
+            this.lblCantidad.Text = "CANTIDAD: "+cant.ToString();
             int canRestante = 10 - cant;
             if (cant<10)
             {   
